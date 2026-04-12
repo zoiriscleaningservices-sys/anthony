@@ -157,7 +157,11 @@ for (const location of LOCATIONS) {
             `Serving ${location}<br/>and surrounding areas.`
         );
 
-        // 8. Fix Relative Asset Paths (videos/ -> ../videos/)
+        // 8. Silo Insulation Navigation Links
+        // Automatically replace any base URL href="/lawrenceville-service/" with href="/city-service/"
+        html = html.replace(/\/lawrenceville-/g, `/${toSlug(location)}-`);
+
+        // 9. Fix Relative Asset Paths (videos/ -> ../videos/)
         html = html.replace(/"videos\//g, '"../videos/');
         
         // Write HTML File

@@ -157,9 +157,21 @@ for (const location of LOCATIONS) {
             `Serving ${location}<br/>and surrounding areas.`
         );
 
-        // 8. Silo Insulation Navigation Links
-        // Automatically replace any base URL href="/lawrenceville-service/" with href="/city-service/"
-        html = html.replace(/\/lawrenceville-/g, `/${toSlug(location)}-`);
+        // 8. Silo Insulation Navigation Links (Relative Backpaths)
+        // Convert the root's `lawrenceville-service/index.html` to `../city-service/index.html`
+        html = html.replace(/href="lawrenceville-/g, `href="../${toSlug(location)}-`);
+        
+        // Convert Geographic Spiderweb references (e.g. suwanee-painting/index.html -> ../suwanee-painting/index.html)
+        html = html.replace(/href="suwanee-/g, `href="../suwanee-`);
+        html = html.replace(/href="duluth-/g, `href="../duluth-`);
+        html = html.replace(/href="snellville-/g, `href="../snellville-`);
+        html = html.replace(/href="buford-/g, `href="../buford-`);
+
+        // Convert areas-we-serve.html reference to go up one directory
+        html = html.replace(/href="areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
+
+        // Fix Home button in Navbar
+        html = html.replace(/href="\/"/g, 'href="../index.html"');
 
         // 9. Fix Relative Asset Paths (videos/ -> ../videos/)
         html = html.replace(/"videos\//g, '"../videos/');
@@ -175,7 +187,7 @@ for (const location of LOCATIONS) {
         sitemapUrls.push(`  <url>\n    <loc>${fullUrl}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`);
         
         // HTML Sitemap link
-        htmlSitemapLinks += `<li><a href="/${slug}/">${service} in ${location}</a></li>\n`;
+        htmlSitemapLinks += `<li><a href="${slug}/index.html">${service} in ${location}</a></li>\n`;
 
         totalGenerated++;
         if (totalGenerated % 1000 === 0) {

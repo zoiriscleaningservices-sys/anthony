@@ -184,7 +184,7 @@ for (const location of LOCATIONS) {
         
         // Push URL for sitemaps
         const fullUrl = `https://www.anthonyspaintingservice.com/${slug}/`;
-        sitemapUrls.push(`  <url>\n    <loc>${fullUrl}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`);
+        sitemapUrls.push(`  <url>\n    <loc>${fullUrl}</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>`);
         
         // HTML Sitemap link
         htmlSitemapLinks += `<li><a href="${slug}/index.html">${service} in ${location}</a></li>\n`;

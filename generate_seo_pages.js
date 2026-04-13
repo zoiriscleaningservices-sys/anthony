@@ -158,20 +158,27 @@ for (const location of LOCATIONS) {
         );
 
         // 8. Silo Insulation Navigation Links (Relative Backpaths)
-        // Convert the root's `lawrenceville-service/index.html` to `../city-service/index.html`
+        // Convert the static footer's "Our Services" `lawrenceville-service/index.html` to `../city-service/index.html`
         html = html.replace(/href="lawrenceville-/g, `href="../${toSlug(location)}-`);
         
-        // Convert Geographic Spiderweb references (e.g. suwanee-painting/index.html -> ../suwanee-painting/index.html)
-        html = html.replace(/href="suwanee-/g, `href="../suwanee-`);
-        html = html.replace(/href="duluth-/g, `href="../duluth-`);
-        html = html.replace(/href="snellville-/g, `href="../snellville-`);
-        html = html.replace(/href="buford-/g, `href="../buford-`);
+        // Convert Babel generated dynamic strings mapping `lawrenceville-${service.slug}` to `../city-${service.slug}`
+        html = html.split('lawrenceville-${service.slug}').join(`../${toSlug(location)}-\${service.slug}`);
+
+        // Convert Geographic Spiderweb references mapping `./suwanee-` to `../suwanee-`
+        html = html.replace(/href="\.\/lawrenceville-/g, `href="../lawrenceville-`);
+        html = html.replace(/href="\.\/suwanee-/g, `href="../suwanee-`);
+        html = html.replace(/href="\.\/duluth-/g, `href="../duluth-`);
+        html = html.replace(/href="\.\/snellville-/g, `href="../snellville-`);
+        html = html.replace(/href="\.\/buford-/g, `href="../buford-`);
 
         // Convert areas-we-serve.html reference to go up one directory
         html = html.replace(/href="areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
 
-        // Fix Home button in Navbar
+        // Fix Home button in Navbar Logo & Mobile Menus
         html = html.replace(/href="\/"/g, 'href="../index.html"');
+        
+        // Fix Home button in NAV_ITEMS literal array
+        html = html.split("href: '/'").join("href: '../index.html'");
 
         // 9. Fix Relative Asset Paths (videos/ -> ../videos/)
         html = html.replace(/"videos\//g, '"../videos/');

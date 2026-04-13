@@ -174,15 +174,6 @@ for (const location of LOCATIONS) {
         // Convert areas-we-serve.html reference to go up one directory
         html = html.replace(/href="dist\/areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
 
-        // Fix Home button in Navbar Logo & Mobile Menus
-        html = html.replace(/href="\/"/g, 'href="../index.html"');
-        
-        // Fix Home button in NAV_ITEMS literal array
-        html = html.split("href: '/'").join("href: '../index.html'");
-
-        // 9. Fix Relative Asset Paths (videos/ -> ../videos/)
-        html = html.replace(/"videos\//g, '"../videos/');
-        
         // Write HTML File
         if (!fs.existsSync(dirPath)){
             fs.mkdirSync(dirPath, { recursive: true });

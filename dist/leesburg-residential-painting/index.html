@@ -125,8 +125,8 @@
             -webkit-text-fill-color: transparent;
         }
     </style>
-<link rel="icon" type="image/png" href="../videos/logo.png">
-<link rel="apple-touch-icon" href="../videos/logo.png">
+<link rel="icon" type="image/png" href="/videos/logo.png">
+<link rel="apple-touch-icon" href="/videos/logo.png">
     <link rel="canonical" href="https://www.anthonyspaintingservice.com/leesburg-residential-painting/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -159,10 +159,10 @@
         const AnimatePresence = window.Motion?.AnimatePresence || window.framerMotion?.AnimatePresence || (({ children }) => <>{children}</>);
 
         // --- Constants ---
-        const LOGO_URL = "../videos/logo.png";
+        const LOGO_URL = "/videos/logo.png";
 
         const NAV_ITEMS = [
-            { label: 'Home', href: '../index.html' },
+            { label: 'Home', href: '/' },
             { label: 'Services', href: '#services' },
             { label: 'Contact', href: '#contact' },
         ];
@@ -172,42 +172,42 @@
                 slug: "residential-painting",
                 description: "Transform your home with vibrant colors and flawless finishes that last for years.",
                 icon: "Paintbrush",
-                image: "../videos/Ultra_Realistic_Video_Generation_Complete.mp4"
+                image: "/videos/Ultra_Realistic_Video_Generation_Complete.mp4"
             },
             {
                 title: "Commercial Property",
                 slug: "commercial-painting",
                 description: "Professional painting solutions for Lawrenceville businesses, offices, retail spaces, and heavy industrial complexes.",
                 icon: "Building2",
-                image: "../videos/67d8fc8a03d9428ec0b29c6f_67eb0de84444fe3be438db38_Commercial-Painting-transcode.mp4"
+                image: "/videos/67d8fc8a03d9428ec0b29c6f_67eb0de84444fe3be438db38_Commercial-Painting-transcode.mp4"
             },
             {
                 title: "Interior Painting",
                 slug: "interior-painting",
                 description: "Expert color consultation and precision interior house painting for every room.",
                 icon: "Palette",
-                image: "../videos/Image_To_Live_Second_Video.mp4"
+                image: "/videos/Image_To_Live_Second_Video.mp4"
             },
             {
                 title: "Epoxy Flooring",
                 slug: "epoxy-flooring",
                 description: "Premium garage floor epoxy and decorative concrete coatings that resist oil and damage.",
                 icon: "Layers",
-                image: "../videos/67d8fc8a03d9428ec0b29c6f_67eb0e0246c623902c3abd89_Concrete-Restoration-transcode.mp4"
+                image: "/videos/67d8fc8a03d9428ec0b29c6f_67eb0e0246c623902c3abd89_Concrete-Restoration-transcode.mp4"
             },
             {
                 title: "Pressure Washing",
                 slug: "pressure-washing",
                 description: "Erase years of grime, mold, and tire marks from your driveways, patios, and roofs.",
                 icon: "Droplet",
-                image: "../videos/67d8fc8a03d9428ec0b29c6f_67eb0e0c4444fe3be4391897_Pressure-Washing-transcode.mp4"
+                image: "/videos/67d8fc8a03d9428ec0b29c6f_67eb0e0c4444fe3be4391897_Pressure-Washing-transcode.mp4"
             },
             {
                 title: "Drywall Repair",
                 slug: "drywall-repair",
                 description: "Seamless hole patching, water damage repair, and perfect texture matching.",
                 icon: "Hammer",
-                image: "../videos/Last_Ultra_Realistic_Video_Generated.mp4"
+                image: "/videos/Last_Ultra_Realistic_Video_Generated.mp4"
             }
         ];
 
@@ -327,7 +327,7 @@
                 <>
                     <nav className={`fixed top-0 left-0 w-full transition-all duration-500 ${isOpen ? 'z-[110] bg-transparent' : 'z-50 ' + (scrolled ? 'bg-brand-paper/95 backdrop-blur-xl py-3 sm:py-4 border-b border-brand-dark/10' : 'bg-transparent py-6 sm:py-8')}`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-                        <a href="../index.html" className="flex items-center gap-3">
+                        <a href="/" className="flex items-center gap-3">
                             <img src={LOGO_URL} alt="Logo" className="h-10 sm:h-16 w-auto object-contain" />
                         </a>
 
@@ -453,7 +453,7 @@
                             playsInline
                             className="w-full h-full object-cover opacity-80"
                         >
-                            <source src="../videos/hero.mp4" type="video/mp4" />
+                            <source src="/videos/hero.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                         <div className="absolute inset-0 bg-gradient-to-b from-brand-light/10 via-brand-light/30 to-brand-light/90" />

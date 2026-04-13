@@ -174,6 +174,10 @@ for (const location of LOCATIONS) {
         // Convert areas-we-serve.html reference to go up one directory
         html = html.replace(/href="dist\/areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
 
+        // Dynamically lock "Home" buttons to stay within the current geographical silo
+        html = html.replace(/href="\/"/g, `href="../${toSlug(location)}-residential-painting/index.html"`);
+        html = html.split("href: '/'").join(`href: '../${toSlug(location)}-residential-painting/index.html'`);
+
         // Write HTML File
         if (!fs.existsSync(dirPath)){
             fs.mkdirSync(dirPath, { recursive: true });

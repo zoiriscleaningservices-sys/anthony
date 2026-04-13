@@ -158,21 +158,21 @@ for (const location of LOCATIONS) {
         );
 
         // 8. Silo Insulation Navigation Links (Relative Backpaths)
-        // Convert the static footer's "Our Services" `lawrenceville-service/index.html` to `../city-service/index.html`
-        html = html.replace(/href="lawrenceville-/g, `href="../${toSlug(location)}-`);
+        // Convert the static footer's "Our Services" `dist/lawrenceville-service/index.html` to `../city-service/index.html`
+        html = html.replace(/href="dist\/lawrenceville-/g, `href="../${toSlug(location)}-`);
         
-        // Convert Babel generated dynamic strings mapping `lawrenceville-${service.slug}` to `../city-${service.slug}`
-        html = html.split('lawrenceville-${service.slug}').join(`../${toSlug(location)}-\${service.slug}`);
+        // Convert Babel generated dynamic strings mapping `dist/lawrenceville-${service.slug}` to `../city-${service.slug}`
+        html = html.split('dist/lawrenceville-${service.slug}').join(`../${toSlug(location)}-\${service.slug}`);
 
-        // Convert Geographic Spiderweb references mapping `./suwanee-` to `../suwanee-`
-        html = html.replace(/href="\.\/lawrenceville-/g, `href="../lawrenceville-`);
-        html = html.replace(/href="\.\/suwanee-/g, `href="../suwanee-`);
-        html = html.replace(/href="\.\/duluth-/g, `href="../duluth-`);
-        html = html.replace(/href="\.\/snellville-/g, `href="../snellville-`);
-        html = html.replace(/href="\.\/buford-/g, `href="../buford-`);
+        // Convert Geographic Spiderweb references mapping `./dist/suwanee-` to `../suwanee-`
+        html = html.replace(/href="\.\/dist\/lawrenceville-/g, `href="../lawrenceville-`);
+        html = html.replace(/href="\.\/dist\/suwanee-/g, `href="../suwanee-`);
+        html = html.replace(/href="\.\/dist\/duluth-/g, `href="../duluth-`);
+        html = html.replace(/href="\.\/dist\/snellville-/g, `href="../snellville-`);
+        html = html.replace(/href="\.\/dist\/buford-/g, `href="../buford-`);
 
         // Convert areas-we-serve.html reference to go up one directory
-        html = html.replace(/href="areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
+        html = html.replace(/href="dist\/areas-we-serve\.html"/g, 'href="../areas-we-serve.html"');
 
         // Fix Home button in Navbar Logo & Mobile Menus
         html = html.replace(/href="\/"/g, 'href="../index.html"');

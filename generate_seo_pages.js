@@ -89,10 +89,6 @@ for (const location of LOCATIONS) {
             /"addressLocality": "Lawrenceville",/g,
             `"addressLocality": "${location}",`
         );
-        html = html.replace(
-            /"@type": "PaintingBuilder",/g,
-            `"@type": "HomeAndConstructionBusiness",`
-        );
 
         // Inject Geo Meta Tags
         html = html.replace(
@@ -108,7 +104,7 @@ for (const location of LOCATIONS) {
         // 4. Canonical
         html = html.replace(
             /<link rel="canonical" href="https:\/\/www\.anthonyspaintingservice\.com\/">/g,
-            `<link rel="canonical" href="https://www.anthonyspaintingservice.com/${slug}/">`
+            `<link rel="canonical" href="https://www.anthonyspaintingservice.com/dist/${slug}/">`
         );
 
         // 5. Hero Section
@@ -185,7 +181,7 @@ for (const location of LOCATIONS) {
         fs.writeFileSync(path.join(dirPath, 'index.html'), html);
         
         // Push URL for sitemaps
-        const fullUrl = `https://www.anthonyspaintingservice.com/${slug}/`;
+        const fullUrl = `https://www.anthonyspaintingservice.com/dist/${slug}/`;
         sitemapUrls.push(`  <url>\n    <loc>${fullUrl}</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>`);
         
         // HTML Sitemap link
@@ -234,7 +230,7 @@ fs.writeFileSync(path.join(OUTPUT_DIR, 'areas-we-serve.html'), htmlSitemapPage);
 const robotsTxt = `User-agent: *
 Allow: /
 
-Sitemap: https://www.anthonyspaintingservice.com/sitemap.xml
+Sitemap: https://www.anthonyspaintingservice.com/dist/sitemap.xml
 `;
 fs.writeFileSync(path.join(OUTPUT_DIR, 'robots.txt'), robotsTxt);
 

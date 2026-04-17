@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.anthonyspaintingservice.com/sitemap.xml
+Sitemap: https://www.anthonyspaintingservice.com/dist/sitemap.xml

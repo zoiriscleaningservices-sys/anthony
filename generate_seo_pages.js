@@ -104,7 +104,7 @@ for (const location of LOCATIONS) {
         // 4. Canonical
         html = html.replace(
             /<link rel="canonical" href="https:\/\/www\.anthonyspaintingservice\.com\/">/g,
-            `<link rel="canonical" href="https://www.anthonyspaintingservice.com/dist/${slug}/">`
+            `<link rel="canonical" href="https://www.anthonyspaintingservice.com/${slug}/">`
         );
 
         // 5. Hero Section
@@ -181,7 +181,7 @@ for (const location of LOCATIONS) {
         fs.writeFileSync(path.join(dirPath, 'index.html'), html);
         
         // Push URL for sitemaps
-        const fullUrl = `https://www.anthonyspaintingservice.com/dist/${slug}/`;
+        const fullUrl = `https://www.anthonyspaintingservice.com/${slug}/`;
         sitemapUrls.push(`  <url>\n    <loc>${fullUrl}</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>`);
         
         // HTML Sitemap link
@@ -196,10 +196,25 @@ for (const location of LOCATIONS) {
 
 console.log('Finished generating HTML files. Creating sitemaps...');
 
-// Generate XML Sitemap
+// Generate Chunked XML Sitemaps
+const URLs_PER_SITEMAP = 1000;
+const numSitemaps = Math.ceil(sitemapUrls.length / URLs_PER_SITEMAP);
+const sitemapIndexUrls = [];
+
 const xmlHeader = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 const xmlFooter = `\n</urlset>`;
-fs.writeFileSync(path.join(OUTPUT_DIR, 'sitemap.xml'), xmlHeader + sitemapUrls.join('\n') + xmlFooter);
+
+for (let i = 0; i < numSitemaps; i++) {
+    const chunk = sitemapUrls.slice(i * URLs_PER_SITEMAP, (i + 1) * URLs_PER_SITEMAP);
+    fs.writeFileSync(path.join(OUTPUT_DIR, `sitemap-${i + 1}.xml`), xmlHeader + chunk.join('\n') + xmlFooter);
+    
+    sitemapIndexUrls.push(`  <sitemap>\n    <loc>https://www.anthonyspaintingservice.com/sitemap-${i + 1}.xml</loc>\n    <lastmod>${new Date().toISOString()}</lastmod>\n  </sitemap>`);
+}
+
+// Generate Sitemap Index
+const sitemapIndexHeader = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+const sitemapIndexFooter = `\n</sitemapindex>`;
+fs.writeFileSync(path.join(OUTPUT_DIR, 'sitemap_index.xml'), sitemapIndexHeader + sitemapIndexUrls.join('\n') + sitemapIndexFooter);
 
 // Generate HTML Sitemap Listing
 const htmlSitemapPage = `<!DOCTYPE html>
@@ -230,8 +245,8 @@ fs.writeFileSync(path.join(OUTPUT_DIR, 'areas-we-serve.html'), htmlSitemapPage);
 const robotsTxt = `User-agent: *
 Allow: /
 
-Sitemap: https://www.anthonyspaintingservice.com/dist/sitemap.xml
+Sitemap: https://www.anthonyspaintingservice.com/sitemap_index.xml
 `;
 fs.writeFileSync(path.join(OUTPUT_DIR, 'robots.txt'), robotsTxt);
 
-console.log(`✅ Success! Generated ${totalGenerated} SEO pages, sitemap.xml, areas-we-serve.html, and robots.txt.`);
+console.log(`✅ Success! Generated ${totalGenerated} SEO pages, sitemaps, areas-we-serve.html, and robots.txt.`);
